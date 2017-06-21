@@ -60,4 +60,150 @@ Output:
 This is a literate program.  Generating the pure program is called
 tangling.  Concretely tangle with C-cvt in Emacs Orgmode.
 
+*** For the very first stages
+
+You might need to perform
+
+#+begin_src shell
+export CASK_EMACS=/usr/bin/emacs-25.2
+cask init
+cask install
+cask exec ert-runner init
+#+end_src
+
+- [2017-06-21 Wed 12:14] tip version of Emacs did not work with cask install.
+
 * Testing
+:PROPERTIES:
+:ID:       c960a64f-5dc8-463d-b7b5-48f3c1ff2a3d
+:header-args:emacs-lisp: :tangle test/underline-with-char-test.el
+:END:
+
+The tests are style ert-runner (which needs cask IIUC.)
+
+Run tests e.g. like
+
+[[elisp:(compile "CASK_EMACS=/usr/bin/emacs-25.2 make test")
+]]
+Get help with
+
+#+begin_src shell
+cask exec ert-runner help
+#+end_src
+
+- Note :: I think that the test file must end with "-test" with
+          ert-runner default settings.
+
+*** First line
+:PROPERTIES:
+:ID:       c3ab7721-53d9-4abe-a5e6-e031c4a9f5f1
+:END:
+
+#+begin_src emacs-lisp :padline no
+;;; underline-with-char-test.el --- tests for underline-with-char.el  -*- lexical-binding: t -*-
+#+end_src
+
+*** Concrete tests
+:PROPERTIES:
+:ID:       17c5897e-3413-4576-aa83-3869e0cb1053
+:END:
+
+#+begin_src emacs-lisp :comments both
+(require 'underline-with-char)
+
+(ert-deftest f2149b5d7e74f04715435e3767bb5b28eb973ab6 ()
+  (should
+   (equal
+    "lala
+----"
+    (with-temp-buffer
+      (insert "lala
+")
+      (call-interactively #'underline-with-char)
+      (buffer-substring (point-min) (point-max))))))
+
+(ert-deftest f3c73d8e5d16ed6dc6855c7fe36160ba030c9f91 ()
+  (should
+   (equal
+    "lala
+    "
+    (with-temp-buffer
+      (insert "lala
+")
+      (call-interactively #'underline-with-char-space)
+      (buffer-substring (point-min) (point-max))))))
+#+end_src
+
+*** Last line
+:PROPERTIES:
+:ID:       d37f9d32-541b-4a08-815e-394d858586d6
+:END:
+#+begin_src emacs-lisp
+;;; underline-with-char-test.el ends here
+#+end_src
+
+* Code
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle underline-with-char.el
+:END:
+
+*** First line
+:PROPERTIES:
+:ID:       c3ab7721-53d9-4abe-a5e6-e031c4a9f5f1
+:END:
+
+#+begin_src emacs-lisp :padline no
+;;; underline-with-char.el --- Underline with a char  -*- lexical-binding: t -*-
+
+;; THIS FILE HAS BEEN GENERATED.
+
+#+end_src
+
+*** Program
+:PROPERTIES:
+:ID:       17c5897e-3413-4576-aa83-3869e0cb1053
+:END:
+
+#+begin_src emacs-lisp :comments both
+
+;;; Commentary:
+
+;; THIS FILE HAS BEEN GENERATED.
+
+;;; Version: 0.0.0
+
+
+;;; Code:
+
+(defun underline-with-char ()
+  (interactive)
+  (insert
+   (make-string
+    (save-excursion
+      (forward-line -1)
+      (let ((old-point (point)))
+        (- (progn (end-of-line) (point)) old-point)))
+   ?-)))
+
+(defun underline-with-char-space ()
+  (interactive)
+  (insert
+   (make-string
+    (save-excursion
+      (forward-line -1)
+      (let ((old-point (point)))
+        (- (progn (end-of-line) (point)) old-point)))
+   ?\ )))
+
+(provide 'underline-with-char)
+#+end_src
+
+*** Last line
+:PROPERTIES:
+:ID:       d37f9d32-541b-4a08-815e-394d858586d6
+:END:
+#+begin_src emacs-lisp
+
+
+;;; underline-with-char.el ends here
+#+end_src
