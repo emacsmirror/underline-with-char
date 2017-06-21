@@ -1,0 +1,63 @@
+#+title: Underline with a char
+
+* About
+
+When point is below a line then fill the line with a character making
+it as long as the line above.
+
+There might be corner cases that need exceptional handling.
+
+*** Example
+
+Notation: <!> marks point.
+
+***** Full underlining
+
+Input:
+
+#+begin_quote
+lala
+<!>
+#+end_quote
+
+Action:
+
+#+begin_quote
+M-x underline-with-char -
+#+end_quote
+
+Output:
+
+#+begin_quote
+lala
+----<!>
+#+end_quote
+
+***** Partial underlining
+
+Input:
+
+#+begin_quote
+;; lolo
+;; <!>
+#+end_quote
+
+Action:
+
+#+begin_quote
+M-x underline-with-char -
+#+end_quote
+
+Output:
+
+#+begin_quote
+;; lolo
+;; ----<!>
+#+end_quote
+
+* Build
+
+This is a literate program.  Generating the pure program is called
+tangling.  Concretely tangle with C-cvt in Emacs Orgmode.
+
+* Testing
