@@ -125,6 +125,17 @@ cask exec ert-runner help
       (call-interactively #'underline-with-char)
       (buffer-substring (point-min) (point-max))))))
 
+(ert-deftest 1cf806ca781aba4a68e248c4a3c5a0bd3017ea75 ()
+  (should
+   (equal
+    "lala
+la--"
+    (with-temp-buffer
+      (insert "lala
+la")
+      (call-interactively #'underline-with-char)
+      (buffer-substring (point-min) (point-max))))))
+
 (ert-deftest f3c73d8e5d16ed6dc6855c7fe36160ba030c9f91 ()
   (should
    (equal
@@ -183,7 +194,12 @@ cask exec ert-runner help
   (insert
    (make-string
     (save-excursion
-      (forward-line -1)
+      (let ((col (current-column)))
+        (forward-line -1)
+        (end-of-line)
+        (when (< col (current-column))
+          (beginning-of-line)
+          (forward-char col)))
       (let ((old-point (point)))
         (- (progn (end-of-line) (point)) old-point)))
    ?-)))
