@@ -24,45 +24,45 @@ Notation: <!> marks point.
 
 Input:
 
-#+begin_quote
+#+begin_verse
 lala
 <!>
-#+end_quote
+#+end_verse
 
 Action:
 
-#+begin_quote
-M-x underline-with-char -
-#+end_quote
+#+begin_verse
+M-x underline-with-char
+#+end_verse
 
 Output:
 
-#+begin_quote
+#+begin_verse
 lala
 ----<!>
-#+end_quote
+#+end_verse
 
 ***** Partial underlining
 
 Input:
 
-#+begin_quote
+#+begin_verse
 ;; lolo
 ;; <!>
-#+end_quote
+#+end_verse
 
 Action:
 
-#+begin_quote
-M-x underline-with-char -
-#+end_quote
+#+begin_verse
+M-x underline-with-char
+#+end_verse
 
 Output:
 
-#+begin_quote
+#+begin_verse
 ;; lolo
 ;; ----<!>
-#+end_quote
+#+end_verse
 
 * Install
 
