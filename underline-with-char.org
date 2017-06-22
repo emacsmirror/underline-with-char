@@ -209,8 +209,24 @@ a"
   :type 'character)
 
 
-
 (defun underline-with-char ()
+  "Underline the line above with a certain character.
+
+The character is defined by `underline-with-char-fill-char'.
+
+Fill what's remaining if not at the first position.
+
+E.g. with `underline-with-char-fill-char' set to '-' and point
+symbolized as <!> and starting with
+
+;; Commentary:
+;; <!>
+
+get
+
+;; Commentary:
+;; -----------
+"
   (interactive)
   (insert
    (make-string
@@ -226,6 +242,7 @@ a"
     underline-with-char-fill-char)))
 
 (defun underline-with-char-space ()
+  "Underline the line above with a spaces."
   (interactive)
   (let ((underline-with-char-fill-char ? ))
     (underline-with-char)))
