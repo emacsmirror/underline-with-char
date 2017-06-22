@@ -1,5 +1,9 @@
 #+title: Underline with a char
 
+* License
+
+GPL 3
+
 * About
 
 When point is below a line then fill the line with a character making
