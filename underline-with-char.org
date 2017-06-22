@@ -5,8 +5,9 @@
 GPL 3
 
 * About
-
-Build Status: <img href="https://travis-ci.org/marcowahl/underline-with-char.svg?branch=master"/>
+:PROPERTIES:
+:ID:       d1310a31-62ff-452f-b07b-312a17bf85b0
+:END:
 
 When point is below a line then fill the line with a character making
 it as long as the line above.
@@ -70,6 +71,10 @@ Load the elisp file in directory dist/.
 This is a literate program.  Generating the pure program is called
 tangling.  Concretely tangle with C-cvt in Emacs Orgmode.
 
+*** Build Status
+
+[[https://travis-ci.org/marcowahl/underline-with-char.svg?branch=master]]
+
 *** For the very first stages
 
 You might need to perform
@@ -82,7 +87,6 @@ cask exec ert-runner init
 #+end_src
 
 - [2017-06-21 Wed 12:14] tip version of Emacs did not work with cask install.
-
 * Testing
 :PROPERTIES:
 :ID:       c960a64f-5dc8-463d-b7b5-48f3c1ff2a3d
