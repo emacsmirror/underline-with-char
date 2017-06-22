@@ -5,8 +5,8 @@
 ;; :ID:       17c5897e-3413-4576-aa83-3869e0cb1053
 ;; :END:
 
-;; [[file:~/p/elisp/mw/underline-with-char/underline-with-char.org::*Concrete%20tests][Concrete\ tests:1]]
 
+;; [[id:17c5897e-3413-4576-aa83-3869e0cb1053][Concrete tests:1]]
 (require 'underline-with-char)
 
 (ert-deftest f2149b5d7e74f04715435e3767bb5b28eb973ab6 ()
@@ -53,7 +53,6 @@ a"
 ")
       (call-interactively #'underline-with-char-space)
       (buffer-substring (point-min) (point-max))))))
-
-;; Concrete\ tests:1 ends here
+;; Concrete tests:1 ends here
 
 ;;; underline-with-char-test.el ends here

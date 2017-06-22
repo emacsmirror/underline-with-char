@@ -7,8 +7,8 @@
 ;; :ID:       17c5897e-3413-4576-aa83-3869e0cb1053
 ;; :END:
 
-;; [[file:~/p/elisp/mw/underline-with-char/underline-with-char.org::*Program][Program:1]]
 
+;; [[id:17c5897e-3413-4576-aa83-3869e0cb1053][Program:1]]
 ;; THIS FILE HAS BEEN GENERATED.
 
 
@@ -78,7 +78,7 @@ get
 
 
 (provide 'underline-with-char)
-
 ;; Program:1 ends here
 
+
 ;;; underline-with-char.el ends here
