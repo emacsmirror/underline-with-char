@@ -179,10 +179,11 @@ la")
 :END:
 
 #+begin_src emacs-lisp :comments both
-
-;;; Commentary:
 
 ;; THIS FILE HAS BEEN GENERATED.
+
+
+;;; Commentary:
 
 ;;; Version: 0.0.0
 
