@@ -227,13 +227,9 @@ a"
 
 (defun underline-with-char-space ()
   (interactive)
-  (insert
-   (make-string
-    (save-excursion
-      (forward-line -1)
-      (let ((old-point (point)))
-        (- (progn (end-of-line) (point)) old-point)))
-   ?\ )))
+  (let ((underline-with-char-fill-char ? ))
+    (underline-with-char)))
+
 
 (provide 'underline-with-char)
 #+end_src
