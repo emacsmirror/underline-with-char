@@ -103,7 +103,7 @@ cask exec ert-runner help
 :END:
 
 #+begin_src emacs-lisp :padline no
-;;; underline-with-char-test.el --- tests for underline-with-char.el  -*- lexical-binding: t -*-
+;;; underline-with-char-test.el --- tests for underline-with-char.el  -*- lexical-binding: t ; eval: (view-mode 1) -*-
 #+end_src
 
 *** Concrete tests
@@ -167,7 +167,7 @@ la")
 :END:
 
 #+begin_src emacs-lisp :padline no
-;;; underline-with-char.el --- Underline with a char  -*- lexical-binding: t -*-
+;;; underline-with-char.el --- Underline with a char  -*- lexical-binding: t ; eval: (view-mode 1) -*-
 
 ;; THIS FILE HAS BEEN GENERATED.
 
