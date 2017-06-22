@@ -55,6 +55,10 @@ Output:
 ;; ----<!>
 #+end_quote
 
+* Install
+
+Load the elisp file in directory dist/.
+
 * Build
 
 This is a literate program.  Generating the pure program is called
