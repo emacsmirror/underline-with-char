@@ -83,8 +83,11 @@ The tests are style ert-runner (which needs cask IIUC.)
 
 Run tests e.g. like
 
-[[elisp:(compile "CASK_EMACS=/usr/bin/emacs-25.2 make test")
-]]
+[[elisp:(compile "CASK_EMACS=/usr/bin/emacs-25.2 make test") ]] Recall
+cask does not work well with current Emacs tip version I use normally.
+This is the rationale for the setting CASK_EMACS to a suitable
+version.
+
 Get help with
 
 #+begin_src shell
