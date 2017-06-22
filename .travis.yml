@@ -7,3 +7,4 @@ before_install:
   - evm install "$EVM_EMACS" --use --skip
 script:
   - make test
+  # trigger travis with a push
