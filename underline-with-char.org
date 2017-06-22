@@ -136,6 +136,18 @@ la")
       (call-interactively #'underline-with-char)
       (buffer-substring (point-min) (point-max))))))
 
+(ert-deftest 88bded2c526dcf44116420e7a33eb7ab58b905ee ()
+  (should
+   (string=
+    "a
+a"
+    (with-temp-buffer
+      (let ((underline-with-char-fill-char ?a))
+        (insert "a
+")
+        (call-interactively #'underline-with-char))
+        (buffer-substring (point-min) (point-max))))))
+
 (ert-deftest f3c73d8e5d16ed6dc6855c7fe36160ba030c9f91 ()
   (should
    (equal
@@ -190,6 +202,14 @@ la")
 
 ;;; Code:
 
+
+(defcustom underline-with-char-fill-char ?-
+  "The character for the underline."
+  :group 'underline-with-char
+  :type 'character)
+
+
+
 (defun underline-with-char ()
   (interactive)
   (insert
@@ -203,7 +223,7 @@ la")
           (forward-char col)))
       (let ((old-point (point)))
         (- (progn (end-of-line) (point)) old-point)))
-   ?-)))
+    underline-with-char-fill-char)))
 
 (defun underline-with-char-space ()
   (interactive)
