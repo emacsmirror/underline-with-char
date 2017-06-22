@@ -6,6 +6,8 @@ GPL 3
 
 * About
 
+Build Status: <img href="https://travis-ci.org/marcowahl/underline-with-char.svg?branch=master"/>
+
 When point is below a line then fill the line with a character making
 it as long as the line above.
 
