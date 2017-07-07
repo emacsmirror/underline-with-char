@@ -118,7 +118,7 @@ XXXX<!>
 
 * Install
 
-Load the elisp file in directory dist/.
+Load the elisp file.
 
 * Build
 
