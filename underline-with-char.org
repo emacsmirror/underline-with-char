@@ -380,7 +380,7 @@ Fill what's remaining if not at the first position.
 
 With prefix ARG use the CHAR for subsequent calls to
 `underline-with-char'"
-  (interactive  "cchar: \nP")
+  (interactive  "P\ncchar: ")
   (insert
    (make-string
     (save-excursion

@@ -8,7 +8,7 @@
 ;; :END:
 
 
-;; [[id:17c5897e-3413-4576-aa83-3869e0cb1053][Program:1]]
+;; [[file:~/p/elisp/mw/underline-with-char/underline-with-char.org::*Program][Program:1]]
 ;; THIS FILE HAS BEEN GENERATED.
 
 
@@ -114,7 +114,7 @@ Fill what's remaining if not at the first position.
 
 With prefix ARG use the CHAR for subsequent calls to
 `underline-with-char'"
-  (interactive  "cchar: \nP")
+  (interactive  "P\ncchar: ")
   (insert
    (make-string
     (save-excursion
