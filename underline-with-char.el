@@ -8,7 +8,7 @@
 ;; :END:
 
 
-;; [[file:~/p/elisp/mw/underline-with-char/underline-with-char.org::*Program][Program:1]]
+;; [[id:17c5897e-3413-4576-aa83-3869e0cb1053][Program:1]]
 ;; THIS FILE HAS BEEN GENERATED.
 
 
@@ -18,17 +18,62 @@
 ;; Package-Requires: ((emacs "24"))
 ;; Keywords: convenience
 
+;; There are two functions
+;;
+;; 1. `underline-with-char' uses the internal setting for the fill-char.
+;; 2. `underline-with-char-choose' allows to choose the fill-char.
+
 ;; E.g. with `underline-with-char-fill-char' set to '-' and point
 ;; symbolized as <!> and starting with
 ;;
-;; ;; Commentary:
+;; ;; Worthy to be underlined
 ;; ;; <!>
 ;;
-;; M-x underline-with-char yields
+;; then
 ;;
-;; ;; Commentary:
-;; ;; -----------
+;; M-x underline-with-char
 ;;
+;; yields
+;;
+;; ;; Worthy to be underlined
+;; ;; -----------------------
+
+;; You can also set a character for the next underline using function
+;; `underline-with-char-choose'.
+
+;; Example
+;; _______
+
+;; ;; Worthy to be underlined
+;; ;; <!>
+;;
+;; then
+;;
+;; M-x underline-with-char-choose _
+;;
+;; yields
+;;
+;; ;; Worthy to be underlined
+;; ;; _______________________
+
+;; You can also set the underline character for subsequent calls to `underline-with-char'.
+;; Example
+;; _______
+
+;; Worthy to be underlined two times
+;; <!>
+;;
+;; then
+;;
+;; C-u M-x underline-with-char-choose X
+;; RET
+;; M-x underline-with-char
+
+;; yields
+;;
+;; Worthy to be underlined two times
+;; XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+;; XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
 ;;; Code:
