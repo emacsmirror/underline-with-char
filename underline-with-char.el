@@ -7,8 +7,8 @@
 ;; :ID:       17c5897e-3413-4576-aa83-3869e0cb1053
 ;; :END:
 
-;; [[file:~/p/elisp/mw/underline-with-char/underline-with-char.org::*Program][Program:1]]
 
+;; [[file:~/p/elisp/mw/underline-with-char/underline-with-char.org::*Program][Program:1]]
 ;; THIS FILE HAS BEEN GENERATED.
 
 
@@ -40,6 +40,7 @@
   :type 'character)
 
 
+;;;###autoload
 (defun underline-with-char ()
   "Underline the line above with a certain character.
 
@@ -56,9 +57,19 @@ symbolized as <!> and starting with
 get
 
 ;; Commentary:
-;; -----------
-"
+;; -----------"
   (interactive)
+  (underline-with-char-choose nil underline-with-char-fill-char))
+
+;;;###autoload
+(defun underline-with-char-choose (arg char)
+  "Underline the line above with a certain character.
+
+Fill what's remaining if not at the first position.
+
+With prefix ARG use the CHAR for subsequent calls to
+`underline-with-char'"
+  (interactive  "cchar: \nP")
   (insert
    (make-string
     (save-excursion
@@ -70,17 +81,13 @@ get
           (forward-char col)))
       (let ((old-point (point)))
         (- (progn (end-of-line) (point)) old-point)))
-    underline-with-char-fill-char)))
-
-(defun underline-with-char-space ()
-  "Underline the line above with a spaces."
-  (interactive)
-  (let ((underline-with-char-fill-char ? ))
-    (underline-with-char)))
+    char))
+    (if (equal '(4) arg)
+      (setq underline-with-char-fill-char char)))
 
 
 (provide 'underline-with-char)
-
 ;; Program:1 ends here
 
+
 ;;; underline-with-char.el ends here

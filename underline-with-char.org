@@ -2,6 +2,8 @@
 
 * License
 
+Copyright (c) Marco Wahl 2017
+
 GPL 3
 
 * About
@@ -14,9 +16,12 @@ GPL 3
 When point is below a line then fill the line with a character making
 it as long as the line above.
 
-There might be corner cases that need exceptional handling.
+There are two functions
 
-*** Example
+1. =underline-with-char= uses the internal setting for the fill-char.
+2. =underline-with-char-choose= allows to choose the fill-char.
+
+*** Examples
 
 Notation: <!> marks point.
 
@@ -62,6 +67,53 @@ Output:
 #+begin_src text
 ;; lolo
 ;; ----<!>
+#+end_src
+
+***** Use a certain char for underlining
+
+Input:
+
+#+begin_src text
+lala
+<!>
+#+end_src
+
+Action:
+
+#+begin_src text
+M-x underline-with-char-choose X
+#+end_src
+
+Output:
+
+#+begin_src text
+lala
+XXXX<!>
+#+end_src
+
+***** Use a certain char for underlining and set as fill-char
+
+Input:
+
+#+begin_src text
+lala
+<!>
+#+end_src
+
+Action (Note the prefix argument.):
+
+#+begin_src text
+C-u M-x underline-with-char-choose X
+RET
+M-x underline-with-char
+#+end_src
+
+Output:
+
+#+begin_src text
+lala
+XXXX
+XXXX<!>
 #+end_src
 
 * Install
@@ -127,15 +179,17 @@ cask exec ert-runner help
 (require 'underline-with-char)
 
 (ert-deftest f2149b5d7e74f04715435e3767bb5b28eb973ab6 ()
+
   (should
    (equal
     "lala
 ----"
     (with-temp-buffer
-      (insert "lala
+      (let ((underline-with-char-fill-char ?-))
+       (insert "lala
 ")
-      (call-interactively #'underline-with-char)
-      (buffer-substring (point-min) (point-max))))))
+       (call-interactively #'underline-with-char)
+       (buffer-substring (point-min) (point-max)))))))
 
 (ert-deftest 1cf806ca781aba4a68e248c4a3c5a0bd3017ea75 ()
   (should
@@ -143,10 +197,11 @@ cask exec ert-runner help
     "lala
 la--"
     (with-temp-buffer
-      (insert "lala
+      (let ((underline-with-char-fill-char ?-))
+        (insert "lala
 la")
-      (call-interactively #'underline-with-char)
-      (buffer-substring (point-min) (point-max))))))
+        (call-interactively #'underline-with-char)
+        (buffer-substring (point-min) (point-max)))))))
 
 (ert-deftest 88bded2c526dcf44116420e7a33eb7ab58b905ee ()
   (should
@@ -160,7 +215,7 @@ a"
         (call-interactively #'underline-with-char))
         (buffer-substring (point-min) (point-max))))))
 
-(ert-deftest f3c73d8e5d16ed6dc6855c7fe36160ba030c9f91 ()
+(ert-deftest eb74280b23db3a9ac18032d641aa280a6cb2c4c1 ()
   (should
    (equal
     "lala
@@ -168,9 +223,25 @@ a"
     (with-temp-buffer
       (insert "lala
 ")
-      (call-interactively #'underline-with-char-space)
+      (underline-with-char-choose nil ? )
+      (buffer-substring (point-min) (point-max))))))
+
+(ert-deftest 69756cd95b0b4ad224f728d57799253664e1c79c ()
+  (should
+   (equal
+    "lala
+++++
+++++"
+    (with-temp-buffer
+      (insert "lala
+")
+      (underline-with-char-choose '(4) ?+)
+      (insert "\n")
+      (underline-with-char)
       (buffer-substring (point-min) (point-max))))))
 #+end_src
+---------
++++++++++
 
 *** Last line
 :PROPERTIES:
@@ -213,17 +284,62 @@ a"
 ;; Package-Requires: ((emacs "24"))
 ;; Keywords: convenience
 
+;; There are two functions
+;;
+;; 1. `underline-with-char' uses the internal setting for the fill-char.
+;; 2. `underline-with-char-choose' allows to choose the fill-char.
+
 ;; E.g. with `underline-with-char-fill-char' set to '-' and point
 ;; symbolized as <!> and starting with
 ;;
-;; ;; Commentary:
+;; ;; Worthy to be underlined
 ;; ;; <!>
 ;;
-;; M-x underline-with-char yields
+;; then
 ;;
-;; ;; Commentary:
-;; ;; -----------
+;; M-x underline-with-char
 ;;
+;; yields
+;;
+;; ;; Worthy to be underlined
+;; ;; -----------------------
+
+;; You can also set a character for the next underline using function
+;; `underline-with-char-choose'.
+
+;; Example
+;; _______
+
+;; ;; Worthy to be underlined
+;; ;; <!>
+;;
+;; then
+;;
+;; M-x underline-with-char-choose _
+;;
+;; yields
+;;
+;; ;; Worthy to be underlined
+;; ;; _______________________
+
+;; You can also set the underline character for subsequent calls to `underline-with-char'.
+;; Example
+;; _______
+
+;; Worthy to be underlined two times
+;; <!>
+;;
+;; then
+;;
+;; C-u M-x underline-with-char-choose X
+;; RET
+;; M-x underline-with-char
+
+;; yields
+;;
+;; Worthy to be underlined two times
+;; XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+;; XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
 ;;; Code:
@@ -252,9 +368,19 @@ symbolized as <!> and starting with
 get
 
 ;; Commentary:
-;; -----------
-"
+;; -----------"
   (interactive)
+  (underline-with-char-choose nil underline-with-char-fill-char))
+
+;;;###autoload
+(defun underline-with-char-choose (arg char)
+  "Underline the line above with a certain character.
+
+Fill what's remaining if not at the first position.
+
+With prefix ARG use the CHAR for subsequent calls to
+`underline-with-char'"
+  (interactive  "cchar: \nP")
   (insert
    (make-string
     (save-excursion
@@ -266,14 +392,9 @@ get
           (forward-char col)))
       (let ((old-point (point)))
         (- (progn (end-of-line) (point)) old-point)))
-    underline-with-char-fill-char)))
-
-;;;###autoload
-(defun underline-with-char-space ()
-  "Underline the line above with a spaces."
-  (interactive)
-  (let ((underline-with-char-fill-char ? ))
-    (underline-with-char)))
+    char))
+    (if (equal '(4) arg)
+      (setq underline-with-char-fill-char char)))
 
 
 (provide 'underline-with-char)
