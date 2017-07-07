@@ -91,7 +91,7 @@ lala
 XXXX<!>
 #+end_src
 
-***** Use a certain char for underlining and set as fill-char
+***** Set a char for subsequent underlinings
 
 Input:
 
