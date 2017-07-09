@@ -36,6 +36,13 @@ yields
 ;; -----------------------
 #+end_src
 
+*** Version
+
+#+name: version
+#+begin_src txt
+2.0.0
+#+end_src
+
 * Install
 
 Load the elisp file.
@@ -181,14 +188,14 @@ la")
 :ID:       17c5897e-3413-4576-aa83-3869e0cb1053
 :END:
 
-#+begin_src emacs-lisp :comments both
+#+begin_src emacs-lisp :comments both :noweb yes
 
 ;; THIS FILE HAS BEEN GENERATED.
 
 
 ;;; Commentary:
 
-;; Version: 1.0.0
+;; Version: <<version>>
 ;; Package-Requires: ((emacs "24"))
 ;; Keywords: convenience
 
