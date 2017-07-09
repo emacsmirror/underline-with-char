@@ -118,7 +118,7 @@ XXXX
 
 #+name: version
 #+begin_src txt
-2.0.0
+3.0.0
 #+end_src
 
 * Install
