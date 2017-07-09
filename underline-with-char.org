@@ -13,107 +13,27 @@ GPL 3
 
 [[https://travis-ci.org/marcowahl/underline-with-char.svg?branch=master]]
 
-When point is below a line then fill the line with a character making
-it as long as the line above.
+When point is in an empty line then fill the line with a character
+making it as long as the line above.
 
-There are two functions
+This program provides just command =underline-with-char=.
 
-1. =underline-with-char= uses the internal setting for the fill-char.
-2. =underline-with-char-choose= allows to choose the fill-char.
+*** Example
 
-*** Examples
-
-Notation: <!> marks point.
-
-***** Full underlining
-
-Input:
+Let <!> be the location of the Emacs cursor aka point.
 
 #+begin_src text
-lala
-<!>
-#+end_src
-
-Action:
-
-#+begin_src text
-M-x underline-with-char
-#+end_src
-
-Output:
-
-#+begin_src text
-lala
-----<!>
-#+end_src
-
-***** Partial underlining
-
-Input:
-
-#+begin_src text
-;; lolo
+;; Worthy to be underlined
 ;; <!>
 #+end_src
 
-Action:
+then =M-x underline-with-char -=
+
+yields
 
 #+begin_src text
-M-x underline-with-char
-#+end_src
-
-Output:
-
-#+begin_src text
-;; lolo
-;; ----<!>
-#+end_src
-
-***** Use a certain char for underlining
-
-Input:
-
-#+begin_src text
-lala
-<!>
-#+end_src
-
-Action:
-
-#+begin_src text
-M-x underline-with-char-choose X
-#+end_src
-
-Output:
-
-#+begin_src text
-lala
-XXXX<!>
-#+end_src
-
-***** Set a char for subsequent underlinings
-
-Input:
-
-#+begin_src text
-lala
-<!>
-#+end_src
-
-Action (Note the prefix argument.):
-
-#+begin_src text
-C-u M-x underline-with-char-choose X
-RET
-M-x underline-with-char
-#+end_src
-
-Output:
-
-#+begin_src text
-lala
-XXXX
-XXXX<!>
+;; Worthy to be underlined
+;; -----------------------
 #+end_src
 
 * Install
@@ -272,7 +192,7 @@ la")
 ;; Package-Requires: ((emacs "24"))
 ;; Keywords: convenience
 
-;; There is one function `underline-with-char'.
+;; This program provides just command `underline-with-char'.
 
 ;; Example:
 ;;
