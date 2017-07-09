@@ -147,15 +147,20 @@ The tests are style ert-runner (which needs cask IIUC.)
 
 Run tests e.g. like
 
-[[elisp:(compile "CASK_EMACS=/usr/bin/emacs-25.2 make test") ]] Recall
-cask does not work well with current Emacs tip version I use normally.
-This is the rationale for the setting CASK_EMACS to a suitable
-version.
+[[elisp:(compile%20"CASK_EMACS=/usr/bin/emacs-25.2%20make%20test")][elisp:(compile "CASK_EMACS=/usr/bin/emacs-25.2 make test")]]
+
+Hint: Possibly you need to perform [[elisp:(compile%20"CASK_EMACS=/usr/bin/emacs-25.2%20cask%20install")][elisp:(compile
+"CASK_EMACS=/usr/bin/emacs-25.2 cask install")]] as precondition to be
+able to run tests.
+
+Recall cask does not work well with current Emacs tip version I use
+normally.  This is the rationale for the setting CASK_EMACS to a
+suitable version.
 
 Get help with
 
 #+begin_src shell
-cask exec ert-runner help
+CASK_EMACS=/usr/bin/emacs-25.2 cask exec ert-runner help
 #+end_src
 
 - Note :: I think that the test file must end with "-test" with
