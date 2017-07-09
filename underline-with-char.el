@@ -18,32 +18,157 @@
 ;; Package-Requires: ((emacs "24"))
 ;; Keywords: convenience
 
-;; This program provides just command `underline-with-char'.
+;; When point is in an empty line then fill the line with a character
+;; making it as long as the line above.
 
-;; Example:
+;; This program provides just command =underline-with-char=.
+
+;; Examples
+;; ========
+
+;; Notation: <!> means point.
 ;;
-;; Let <!> be the location of the Emacs cursor aka point.
+;; Full underlining
+;; ................
+;;
+;; Input:
+;; ^^^^^^
+
+;; #+begin_src text
+;; lala
+;; <!>
+;; #+end_src
+;;
+;; Action:
+;; ^^^^^^^
+
+;; #+begin_src text
+;; M-x underline-with-char
+;; #+end_src
+;;
+;; Output:
+;; ^^^^^^^
+
+;; #+begin_src text
+;; lala
+;; ----<!>
+;; #+end_src
+;;
+;; Partial underlining
+;; ...................
+
+;; Input:
+;; ^^^^^^
+
+;; #+begin_src text
+;; ;; lolo
+;; ;; <!>
+;; #+end_src
+;;
+;; Action:
+;; ^^^^^^^
+
+;; #+begin_src text
+;; M-x underline-with-char
+;; #+end_src
+;;
+;; Output:
+;; ^^^^^^^
+
+;; #+begin_src text
+;; ;; lolo
+;; ;; ----<!>
+;; #+end_src
+;;
+;; Use a certain char for current and subsequent underlinings
+;; ..........................................................
+;;
+;; Input:
+;; ^^^^^^
+
+;; #+begin_src text
+;; lala
+;; <!>
+;; #+end_src
+;;
+;; Action:
+;; ^^^^^^^
+
+;; #+begin_src text
+;; C-u M-x underline-with-char X
+;; #+end_src
+;;
+;; Output:
+;; ^^^^^^^
+
+;; #+begin_src text
+;; lala
+;; XXXX<!>
+;; #+end_src
+;;
+;; Change the buffer.  Example:
+;; ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+;; #+begin_src text
+;; lala
+;; XXXX
 ;;
 ;; ;; Worthy to be underlined
 ;; ;; <!>
+;; #+end_src
 ;;
-;; then
+;; Go on without prefix argument (C-u):
+;; ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+;; #+begin_src text
+;; M-x underline-with-char X
+;; #+end_src
 ;;
-;; M-x underline-with-char -
-;;
-;; yields
+;; Output:
+;; ^^^^^^^
+
+;; #+begin_src text
+;; lala
+;; XXXX
 ;;
 ;; ;; Worthy to be underlined
-;; ;; -----------------------
+;; ;; XXXXXXXXXXXXXXXXXXXXXXX<!>
+;; #+end_src
 
 
 ;;; Code:
 
 
+(defcustom underline-with-char-fill-char ?-
+  "The character for the underline."
+  :group 'underline-with-char
+  :type 'character)
+
+
 ;;;###autoload
-(defun underline-with-char (char)
-  "Underline the line above with a certain character."
-  (interactive  "cchar: ")
+(defun underline-with-char (arg)
+  "Underline the line above with a certain character.
+
+Fill what's remaining if not at the first position.
+
+The default character is `underline-with-char-fill-char'.
+
+With prefix ARG use the next entered character for this and
+subsequent underlining.
+
+Example with `underline-with-char-fill-char' set to '-' and point
+symbolized as <!> and starting with
+
+;; Commentary:
+;; <!>
+
+get
+
+;; Commentary:
+;; -----------"
+  (interactive "P")
+  (when (equal '(4) arg)
+    (setq underline-with-char-fill-char (read-char "char: ")))
   (insert
    (make-string
     (save-excursion
@@ -55,7 +180,7 @@
           (forward-char col)))
       (let ((old-point (point)))
         (- (progn (end-of-line) (point)) old-point)))
-    char)))
+        underline-with-char-fill-char)))
 
 
 (provide 'underline-with-char)
