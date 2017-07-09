@@ -18,22 +18,100 @@ making it as long as the line above.
 
 This program provides just command =underline-with-char=.
 
-*** Example
+*** Examples
 
-Let <!> be the location of the Emacs cursor aka point.
+Notation: <!> means point.
+
+***** Full underlining
+
+Input:
 
 #+begin_src text
+lala
+<!>
+#+end_src
+
+Action:
+
+#+begin_src text
+M-x underline-with-char
+#+end_src
+
+Output:
+
+#+begin_src text
+lala
+----<!>
+#+end_src
+
+***** Partial underlining
+
+Input:
+
+#+begin_src text
+;; lolo
+;; <!>
+#+end_src
+
+Action:
+
+#+begin_src text
+M-x underline-with-char
+#+end_src
+
+Output:
+
+#+begin_src text
+;; lolo
+;; ----<!>
+#+end_src
+
+***** Use a certain char for current and subsequent underlinings
+
+Input:
+
+#+begin_src text
+lala
+<!>
+#+end_src
+
+Action:
+
+#+begin_src text
+C-u M-x underline-with-char X
+#+end_src
+
+Output:
+
+#+begin_src text
+lala
+XXXX<!>
+#+end_src
+
+Change the buffer.  Example:
+
+#+begin_src text
+lala
+XXXX
+
 ;; Worthy to be underlined
 ;; <!>
 #+end_src
 
-then =M-x underline-with-char -=
-
-yields
+Go on without prefix argument (C-u):
 
 #+begin_src text
+M-x underline-with-char X
+#+end_src
+
+Output:
+
+#+begin_src text
+lala
+XXXX
+
 ;; Worthy to be underlined
-;; -----------------------
+;; XXXXXXXXXXXXXXXXXXXXXXX<!>
 #+end_src
 
 *** Version
@@ -64,7 +142,10 @@ cask exec ert-runner init
 #+end_src
 
 - [2017-06-21 Wed 12:14] tip version of Emacs did not work with cask install.
+
 * Testing
+
+*** Unit tests
 :PROPERTIES:
 :ID:       c960a64f-5dc8-463d-b7b5-48f3c1ff2a3d
 :header-args:emacs-lisp: :tangle test/underline-with-char-test.el
@@ -93,7 +174,7 @@ CASK_EMACS=/usr/bin/emacs-25.2 cask exec ert-runner help
 - Note :: I think that the test file must end with "-test" with
           ert-runner default settings.
 
-*** First line
+***** First line
 :PROPERTIES:
 :ID:       c3ab7721-53d9-4abe-a5e6-e031c4a9f5f1
 :END:
@@ -102,7 +183,7 @@ CASK_EMACS=/usr/bin/emacs-25.2 cask exec ert-runner help
 ;;; underline-with-char-test.el --- tests for underline-with-char.el  -*- lexical-binding: t ; eval: (view-mode 1) -*-
 #+end_src
 
-*** Concrete tests
+***** Concrete tests
 :PROPERTIES:
 :ID:       17c5897e-3413-4576-aa83-3869e0cb1053
 :END:
@@ -110,61 +191,55 @@ CASK_EMACS=/usr/bin/emacs-25.2 cask exec ert-runner help
 #+begin_src emacs-lisp :comments both
 (require 'underline-with-char)
 
-(ert-deftest 88bded2c526dcf44116420e7a33eb7ab58b905ee ()
-  (should
-   (string=
-    "a
--"
-    (with-temp-buffer
-      (insert "a
-")
-        (underline-with-char ?-)
-        (buffer-substring (point-min) (point-max))))))
+(ert-deftest 146ef8c4c45a15619b234214db2a214a0b197285 ()
 
-(ert-deftest 1cf806ca781aba4a68e248c4a3c5a0bd3017ea75 ()
+  (should
+   (equal
+    "lala
+----"
+    (with-temp-buffer
+      (let ((underline-with-char-fill-char ?-))
+       (insert "lala
+")
+       (call-interactively #'underline-with-char)
+       (buffer-substring (point-min) (point-max)))))))
+
+(ert-deftest 37c1ae9a5a52091dd4090e1ee371ab60805b0d2c ()
   (should
    (equal
     "lala
 la--"
     (with-temp-buffer
-      (insert "lala
+      (let ((underline-with-char-fill-char ?-))
+        (insert "lala
 la")
-        (underline-with-char ?-)
-        (buffer-substring (point-min) (point-max))))))
-
-(ert-deftest eb74280b23db3a9ac18032d641aa280a6cb2c4c1 ()
-  (should
-   (equal
-    "lala
-    "
-    (with-temp-buffer
-      (insert "lala
-")
-      (underline-with-char ? )
-      (buffer-substring (point-min) (point-max))))))
-
-(ert-deftest 69756cd95b0b4ad224f728d57799253664e1c79c ()
-  (should
-   (equal
-    "lala
-++++
-++--"
-    (with-temp-buffer
-      (insert "lala
-")
-      (underline-with-char ?+)
-      (insert "\n++")
-      (underline-with-char ?-)
-      (buffer-substring (point-min) (point-max))))))
+        (call-interactively #'underline-with-char)
+        (buffer-substring (point-min) (point-max)))))))
 #+end_src
 
-*** Last line
+***** Last line
 :PROPERTIES:
 :ID:       d37f9d32-541b-4a08-815e-394d858586d6
 :END:
 #+begin_src emacs-lisp
 ;;; underline-with-char-test.el ends here
 #+end_src
+
+*** Manual tests
+
+***** Change the underline character
+
+- In a new buffer do (insert "lala\n").
+- Point shall be in the line below the text.
+- Do M-x underline-with-char
+- Expectation :: the line has been underlined with some character.
+- Create a fresh line.
+- Do C-u M-x underline-with-char
+- Press X.
+- Expectation :: the line has been underlined with character X.
+- Create a fresh line.
+- Do M-x underline-with-char
+- Expectation :: the line has been underlined with character X.
 
 * Code
 :PROPERTIES:
@@ -199,32 +274,157 @@ la")
 ;; Package-Requires: ((emacs "24"))
 ;; Keywords: convenience
 
-;; This program provides just command `underline-with-char'.
+;; When point is in an empty line then fill the line with a character
+;; making it as long as the line above.
 
-;; Example:
+;; This program provides just command =underline-with-char=.
+
+;; Examples
+;; ========
+
+;; Notation: <!> means point.
 ;;
-;; Let <!> be the location of the Emacs cursor aka point.
+;; Full underlining
+;; ................
+;;
+;; Input:
+;; ^^^^^^
+
+;; #+begin_src text
+;; lala
+;; <!>
+;; #+end_src
+;;
+;; Action:
+;; ^^^^^^^
+
+;; #+begin_src text
+;; M-x underline-with-char
+;; #+end_src
+;;
+;; Output:
+;; ^^^^^^^
+
+;; #+begin_src text
+;; lala
+;; ----<!>
+;; #+end_src
+;;
+;; Partial underlining
+;; ...................
+
+;; Input:
+;; ^^^^^^
+
+;; #+begin_src text
+;; ;; lolo
+;; ;; <!>
+;; #+end_src
+;;
+;; Action:
+;; ^^^^^^^
+
+;; #+begin_src text
+;; M-x underline-with-char
+;; #+end_src
+;;
+;; Output:
+;; ^^^^^^^
+
+;; #+begin_src text
+;; ;; lolo
+;; ;; ----<!>
+;; #+end_src
+;;
+;; Use a certain char for current and subsequent underlinings
+;; ..........................................................
+;;
+;; Input:
+;; ^^^^^^
+
+;; #+begin_src text
+;; lala
+;; <!>
+;; #+end_src
+;;
+;; Action:
+;; ^^^^^^^
+
+;; #+begin_src text
+;; C-u M-x underline-with-char X
+;; #+end_src
+;;
+;; Output:
+;; ^^^^^^^
+
+;; #+begin_src text
+;; lala
+;; XXXX<!>
+;; #+end_src
+;;
+;; Change the buffer.  Example:
+;; ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+;; #+begin_src text
+;; lala
+;; XXXX
 ;;
 ;; ;; Worthy to be underlined
 ;; ;; <!>
+;; #+end_src
 ;;
-;; then
+;; Go on without prefix argument (C-u):
+;; ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+;; #+begin_src text
+;; M-x underline-with-char X
+;; #+end_src
 ;;
-;; M-x underline-with-char -
-;;
-;; yields
+;; Output:
+;; ^^^^^^^
+
+;; #+begin_src text
+;; lala
+;; XXXX
 ;;
 ;; ;; Worthy to be underlined
-;; ;; -----------------------
+;; ;; XXXXXXXXXXXXXXXXXXXXXXX<!>
+;; #+end_src
 
 
 ;;; Code:
 
 
+(defcustom underline-with-char-fill-char ?-
+  "The character for the underline."
+  :group 'underline-with-char
+  :type 'character)
+
+
 ;;;###autoload
-(defun underline-with-char (char)
-  "Underline the line above with a certain character."
-  (interactive  "cchar: ")
+(defun underline-with-char (arg)
+  "Underline the line above with a certain character.
+
+Fill what's remaining if not at the first position.
+
+The default character is `underline-with-char-fill-char'.
+
+With prefix ARG use the next entered character for this and
+subsequent underlining.
+
+Example with `underline-with-char-fill-char' set to '-' and point
+symbolized as <!> and starting with
+
+;; Commentary:
+;; <!>
+
+get
+
+;; Commentary:
+;; -----------"
+  (interactive "P")
+  (when (equal '(4) arg)
+    (setq underline-with-char-fill-char (read-char "char: ")))
   (insert
    (make-string
     (save-excursion
@@ -236,7 +436,7 @@ la")
           (forward-char col)))
       (let ((old-point (point)))
         (- (progn (end-of-line) (point)) old-point)))
-    char)))
+        underline-with-char-fill-char)))
 
 
 (provide 'underline-with-char)
@@ -251,3 +451,7 @@ la")
 
 ;;; underline-with-char.el ends here
 #+end_src
+
+* Tasks
+
+*** TODO Automate the manual tests
