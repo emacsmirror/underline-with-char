@@ -18,103 +18,95 @@ making it as long as the line above.
 
 This program provides just command =underline-with-char=.
 
-*** Examples
 
-Notation: <!> means point.
+** Examples
 
-***** Full underlining
+Notation:
+- <!> means the cursor.
+- RET means the return key.
 
-Input:
+*** Full underlining
+
+**** Input
 
 #+begin_src text
 lala
 <!>
 #+end_src
 
-Action:
+**** Action
 
-#+begin_src text
-M-x underline-with-char
-#+end_src
+M-x underline-with-char RET
 
-Output:
+**** Output
 
 #+begin_src text
 lala
 ----<!>
 #+end_src
 
-***** Partial underlining
+*** Partial underlining
 
-Input:
-
-#+begin_src text
-;; lolo
-;; <!>
-#+end_src
-
-Action:
+**** Input
 
 #+begin_src text
-M-x underline-with-char
+lolololo
+//<!>
 #+end_src
 
-Output:
+**** Action
+
+M-x underline-with-char RET
+
+**** Output
 
 #+begin_src text
-;; lolo
-;; ----<!>
+lolololo
+//------<!>
 #+end_src
 
-***** Use a certain char for current and subsequent underlinings
+*** Use a certain char for current and subsequent underlinings (1)
 
-Input:
+**** Input
 
 #+begin_src text
 lala
 <!>
 #+end_src
 
-Action:
+**** Action
 
-#+begin_src text
-C-u M-x underline-with-char X
-#+end_src
+C-u M-x underline-with-char X RET
 
-Output:
+**** Output
 
 #+begin_src text
 lala
 XXXX<!>
 #+end_src
 
-Change the buffer.  Example:
+*** Use a certain char for current and subsequent underlinings (2)
+
+**** Input
+
+#+begin_src text
+lala
+<!>
+#+end_src
+
+**** Action
+
+C-u M-x underline-with-char X RET RET M-x underline-with-char RET
+
+**** Output
 
 #+begin_src text
 lala
 XXXX
-
-;; Worthy to be underlined
-;; <!>
+XXXX<!>
 #+end_src
 
-Go on without prefix argument (C-u):
-
-#+begin_src text
-M-x underline-with-char X
-#+end_src
-
-Output:
-
-#+begin_src text
-lala
-XXXX
-
-;; Worthy to be underlined
-;; XXXXXXXXXXXXXXXXXXXXXXX<!>
-#+end_src
-
-*** Version
+** Version
 
 #+name: version
 #+begin_src txt
@@ -130,7 +122,7 @@ Load the elisp file.
 This is a literate program.  Generating the pure program is called
 tangling.  Concretely tangle with C-cvt in Emacs Orgmode.
 
-*** For the very first stages
+** For the very first stages
 
 You might need to perform
 
@@ -145,7 +137,7 @@ cask exec ert-runner init
 
 * Testing
 
-*** Unit tests
+** Unit tests
 :PROPERTIES:
 :ID:       c960a64f-5dc8-463d-b7b5-48f3c1ff2a3d
 :header-args:emacs-lisp: :tangle test/underline-with-char-test.el
@@ -174,7 +166,7 @@ CASK_EMACS=/usr/bin/emacs-25.2 cask exec ert-runner help
 - Note :: I think that the test file must end with "-test" with
           ert-runner default settings.
 
-***** First line
+*** First line
 :PROPERTIES:
 :ID:       c3ab7721-53d9-4abe-a5e6-e031c4a9f5f1
 :END:
@@ -183,7 +175,7 @@ CASK_EMACS=/usr/bin/emacs-25.2 cask exec ert-runner help
 ;;; underline-with-char-test.el --- tests for underline-with-char.el  -*- lexical-binding: t ; eval: (view-mode 1) -*-
 #+end_src
 
-***** Concrete tests
+*** Concrete tests
 :PROPERTIES:
 :ID:       17c5897e-3413-4576-aa83-3869e0cb1053
 :END:
@@ -217,7 +209,7 @@ la")
         (buffer-substring (point-min) (point-max)))))))
 #+end_src
 
-***** Last line
+*** Last line
 :PROPERTIES:
 :ID:       d37f9d32-541b-4a08-815e-394d858586d6
 :END:
@@ -225,9 +217,9 @@ la")
 ;;; underline-with-char-test.el ends here
 #+end_src
 
-*** Manual tests
+** Manual tests
 
-***** Change the underline character
+*** Change the underline character
 
 - In a new buffer do (insert "lala\n").
 - Point shall be in the line below the text.
@@ -246,7 +238,7 @@ la")
 :header-args:emacs-lisp: :tangle underline-with-char.el
 :END:
 
-*** First line
+** First line
 :PROPERTIES:
 :ID:       c3ab7721-53d9-4abe-a5e6-e031c4a9f5f1
 :END:
@@ -258,7 +250,7 @@ la")
 
 #+end_src
 
-*** Program
+** Program
 :PROPERTIES:
 :ID:       17c5897e-3413-4576-aa83-3869e0cb1053
 :END:
@@ -268,8 +260,7 @@ la")
 ;; THIS FILE HAS BEEN GENERATED.
 
 
-;;; Commentary:
-
+;;
 ;; Version: <<version>>
 ;; Package-Requires: ((emacs "24"))
 ;; Keywords: convenience
@@ -277,119 +268,102 @@ la")
 ;; When point is in an empty line then fill the line with a character
 ;; making it as long as the line above.
 
+;;; Commentary:
+;;
 ;; This program provides just command =underline-with-char=.
-
+;;
+
 ;; Examples
 ;; ========
-
-;; Notation: <!> means point.
 ;;
+;; Notation:
+;; - <!> means the cursor.
+;; - RET means the return key.
+;;
+
 ;; Full underlining
 ;; ................
 ;;
-;; Input:
-;; ^^^^^^
-
-;; #+begin_src text
+;; Input
+;; _____
+;;
 ;; lala
 ;; <!>
-;; #+end_src
 ;;
-;; Action:
-;; ^^^^^^^
-
-;; #+begin_src text
-;; M-x underline-with-char
-;; #+end_src
+;; Action
+;; ______
 ;;
-;; Output:
-;; ^^^^^^^
-
-;; #+begin_src text
+;; M-x underline-with-char RET
+;;
+;; Output
+;; ______
+;;
 ;; lala
 ;; ----<!>
-;; #+end_src
 ;;
+
 ;; Partial underlining
 ;; ...................
-
-;; Input:
-;; ^^^^^^
-
-;; #+begin_src text
-;; ;; lolo
-;; ;; <!>
-;; #+end_src
 ;;
-;; Action:
-;; ^^^^^^^
-
-;; #+begin_src text
-;; M-x underline-with-char
-;; #+end_src
+;; Input
+;; _____
 ;;
-;; Output:
-;; ^^^^^^^
-
-;; #+begin_src text
-;; ;; lolo
-;; ;; ----<!>
-;; #+end_src
+;; lolololo
+;; //<!>
 ;;
-;; Use a certain char for current and subsequent underlinings
-;; ..........................................................
+;; Action
+;; ______
 ;;
-;; Input:
-;; ^^^^^^
-
-;; #+begin_src text
+;; M-x underline-with-char RET
+;;
+;; Output
+;; ______
+;;
+;; lolololo
+;; //------<!>
+;;
+
+;; Use a certain char for current and subsequent underlinings (1)
+;; ..............................................................
+;;
+;; Input
+;; _____
+;;
 ;; lala
 ;; <!>
-;; #+end_src
 ;;
-;; Action:
-;; ^^^^^^^
-
-;; #+begin_src text
-;; C-u M-x underline-with-char X
-;; #+end_src
+;; Action
+;; ______
 ;;
-;; Output:
-;; ^^^^^^^
-
-;; #+begin_src text
+;; C-u M-x underline-with-char X RET
+;;
+;; Output
+;; ______
+;;
 ;; lala
 ;; XXXX<!>
-;; #+end_src
 ;;
-;; Change the buffer.  Example:
-;; ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-;; #+begin_src text
+
+;; Use a certain char for current and subsequent underlinings (2)
+;; ..............................................................
+;;
+;; Input
+;; _____
+;;
+;; lala
+;; <!>
+;;
+;; Action
+;; ______
+;;
+;; C-u M-x underline-with-char X RET RET M-x underline-with-char RET
+;;
+;; Output
+;; ______
+;;
 ;; lala
 ;; XXXX
-;;
-;; ;; Worthy to be underlined
-;; ;; <!>
-;; #+end_src
-;;
-;; Go on without prefix argument (C-u):
-;; ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-;; #+begin_src text
-;; M-x underline-with-char X
-;; #+end_src
-;;
-;; Output:
-;; ^^^^^^^
-
-;; #+begin_src text
-;; lala
-;; XXXX
-;;
-;; ;; Worthy to be underlined
-;; ;; XXXXXXXXXXXXXXXXXXXXXXX<!>
-;; #+end_src
+;; XXXX<!>
 
 
 ;;; Code:
@@ -442,7 +416,7 @@ get
 (provide 'underline-with-char)
 #+end_src
 
-*** Last line
+** Last line
 :PROPERTIES:
 :ID:       d37f9d32-541b-4a08-815e-394d858586d6
 :END:
@@ -454,4 +428,4 @@ get
 
 * Tasks
 
-*** TODO Automate the manual tests
+** TODO Automate the manual tests
