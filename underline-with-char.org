@@ -13,11 +13,12 @@ GPL 3
 
 [[https://travis-ci.org/marcowahl/underline-with-char.svg?branch=master]]
 
+This program supports underlining with a certain character.
+
 When point is in an empty line then fill the line with a character
 making it as long as the line above.
 
 This program provides just command =underline-with-char=.
-
 
 ** Examples
 
@@ -265,10 +266,12 @@ la")
 ;; Package-Requires: ((emacs "24"))
 ;; Keywords: convenience
 
+;;; Commentary:
+;;
+;; This program supports underlining with a certain character.
+;;
 ;; When point is in an empty line then fill the line with a character
 ;; making it as long as the line above.
-
-;;; Commentary:
 ;;
 ;; This program provides just command =underline-with-char=.
 ;;
