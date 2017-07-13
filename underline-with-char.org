@@ -23,7 +23,7 @@ This program provides just command =underline-with-char=.
 ** Examples
 
 Notation:
-- <!> means the cursor.
+- | means the cursor.
 - RET means the return key.
 
 *** Full underlining
@@ -32,7 +32,7 @@ Notation:
 
 #+begin_src text
 lala
-<!>
+|
 #+end_src
 
 **** Action
@@ -43,7 +43,7 @@ M-x underline-with-char RET
 
 #+begin_src text
 lala
-----<!>
+----|
 #+end_src
 
 *** Partial underlining
@@ -52,7 +52,7 @@ lala
 
 #+begin_src text
 lolololo
-//<!>
+//|
 #+end_src
 
 **** Action
@@ -63,7 +63,7 @@ M-x underline-with-char RET
 
 #+begin_src text
 lolololo
-//------<!>
+//------|
 #+end_src
 
 *** Use a certain char for current and subsequent underlinings (1)
@@ -72,7 +72,7 @@ lolololo
 
 #+begin_src text
 lala
-<!>
+|
 #+end_src
 
 **** Action
@@ -83,7 +83,7 @@ C-u M-x underline-with-char X RET
 
 #+begin_src text
 lala
-XXXX<!>
+XXXX|
 #+end_src
 
 *** Use a certain char for current and subsequent underlinings (2)
@@ -92,7 +92,7 @@ XXXX<!>
 
 #+begin_src text
 lala
-<!>
+|
 #+end_src
 
 **** Action
@@ -104,7 +104,7 @@ C-u M-x underline-with-char X RET RET M-x underline-with-char RET
 #+begin_src text
 lala
 XXXX
-XXXX<!>
+XXXX|
 #+end_src
 
 ** Version
@@ -280,7 +280,7 @@ la")
 ;; ========
 ;;
 ;; Notation:
-;; - <!> means the cursor.
+;; - | means the cursor.
 ;; - RET means the return key.
 ;;
 
@@ -291,7 +291,7 @@ la")
 ;; _____
 ;;
 ;; lala
-;; <!>
+;; |
 ;;
 ;; Action
 ;; ______
@@ -302,7 +302,7 @@ la")
 ;; ______
 ;;
 ;; lala
-;; ----<!>
+;; ----|
 ;;
 
 ;; Partial underlining
@@ -312,7 +312,7 @@ la")
 ;; _____
 ;;
 ;; lolololo
-;; //<!>
+;; //|
 ;;
 ;; Action
 ;; ______
@@ -323,7 +323,7 @@ la")
 ;; ______
 ;;
 ;; lolololo
-;; //------<!>
+;; //------|
 ;;
 
 ;; Use a certain char for current and subsequent underlinings (1)
@@ -333,7 +333,7 @@ la")
 ;; _____
 ;;
 ;; lala
-;; <!>
+;; |
 ;;
 ;; Action
 ;; ______
@@ -344,7 +344,7 @@ la")
 ;; ______
 ;;
 ;; lala
-;; XXXX<!>
+;; XXXX|
 ;;
 
 ;; Use a certain char for current and subsequent underlinings (2)
@@ -354,7 +354,7 @@ la")
 ;; _____
 ;;
 ;; lala
-;; <!>
+;; |
 ;;
 ;; Action
 ;; ______
@@ -366,7 +366,7 @@ la")
 ;;
 ;; lala
 ;; XXXX
-;; XXXX<!>
+;; XXXX|
 
 
 ;;; Code:
@@ -390,15 +390,15 @@ With prefix ARG use the next entered character for this and
 subsequent underlining.
 
 Example with `underline-with-char-fill-char' set to '-' and point
-symbolized as <!> and starting with
+symbolized as | and starting with
 
 ;; Commentary:
-;; <!>
+;; |
 
 get
 
 ;; Commentary:
-;; -----------"
+;; -----------|"
   (interactive "P")
   (when (equal '(4) arg)
     (setq underline-with-char-fill-char (read-char "char: ")))
