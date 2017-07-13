@@ -432,3 +432,5 @@ get
 * Tasks
 
 ** TODO Automate the manual tests
+
+** TODO Generate the in the elisp-file from the about section
