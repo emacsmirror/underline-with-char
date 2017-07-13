@@ -16,7 +16,7 @@ package: compile
 	cask package
 
 clean:
-	-rm $(ELISP_FILES)
+	-rm $(ELISP_FILES) *.elc
 	-rm -r dist
 
 .PHONY: test clean
