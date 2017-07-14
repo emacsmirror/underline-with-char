@@ -427,9 +427,8 @@ get
         (when (< col (current-column))
           (beginning-of-line)
           (forward-char col)))
-      (let ((old-point (point)))
-        (- (progn (end-of-line) (point)) old-point)))
-        underline-with-char-fill-char)))
+      (- (point-at-eol) (point)))
+    underline-with-char-fill-char)))
 
 
 (provide 'underline-with-char)
