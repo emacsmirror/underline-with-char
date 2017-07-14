@@ -447,10 +447,7 @@ get
       (let ((col (current-column)))
         (forward-line -1)
         (end-of-line)
-        (when (< col (current-column))
-          (beginning-of-line)
-          (forward-char col)))
-      (- (point-at-eol) (point)))
+        (max 0 (- (current-column) col))))
     underline-with-char-fill-char)))
 
 
