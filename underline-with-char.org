@@ -131,7 +131,11 @@ E.g. from [[https://melpa.org/#/underline-with-char][file:https://melpa.org/pack
 This is a literate program.  Generating the pure program is called
 tangling.  Concretely tangle with C-cvt in Emacs Orgmode.
 
-** For the very first stages
+** Build with cask
+
+With support of cask the build can be done in seperate environment.
+
+*** For the very first stages
 
 You might need to perform
 
@@ -166,7 +170,7 @@ Recall cask does not work well with current Emacs tip version I use
 normally.  This is the rationale for the setting CASK_EMACS to a
 suitable version.
 
-Get help with
+Get help about the test-runner with
 
 #+begin_src shell
 CASK_EMACS=/usr/bin/emacs-25.2 cask exec ert-runner help
