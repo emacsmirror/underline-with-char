@@ -116,7 +116,15 @@ XXXX|
 
 * Install
 
-Load the elisp file.
+There are options.
+
+** Install the package
+
+E.g. from [[https://melpa.org/#/underline-with-char][file:https://melpa.org/packages/underline-with-char-badge.svg]].
+
+** Load the elisp file
+
+=M-x load <path to underline-with-char.el>=
 
 * Build
 
