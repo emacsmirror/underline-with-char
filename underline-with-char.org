@@ -468,4 +468,17 @@ get
 
 ** TODO Automate the manual tests
 
-** TODO Generate the in the elisp-file from the about section
+** TODO Generate the Commentary from the about section
+
+*** input
+
+the about section.  (maybe some additional information about
+what shall go into the documentation.  idea: use tags somehow.)
+
+*** action
+
+process the data.
+
+*** output
+
+Fresh Commentary-section in the Org-file to be tangled.  Or similar.
