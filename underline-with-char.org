@@ -111,7 +111,7 @@ XXXX|
 
 #+name: version
 #+begin_src txt
-3.0.0
+3.0.1
 #+end_src
 
 ** Links
@@ -278,15 +278,38 @@ la")
 :header-args:emacs-lisp: :tangle underline-with-char.el
 :END:
 
-** First line
+** First lines
 :PROPERTIES:
 :ID:       c3ab7721-53d9-4abe-a5e6-e031c4a9f5f1
 :END:
 
-#+begin_src emacs-lisp :padline no
+#+begin_src emacs-lisp :padline no :noweb yes
 ;;; underline-with-char.el --- Underline with a char  -*- lexical-binding: t ; eval: (view-mode 1) -*-
 
 ;; THIS FILE HAS BEEN GENERATED.
+
+;; Copyright (C) 2017 Marco Wahl
+;;
+;; Version: <<version>>
+;; Package-Requires: ((emacs "24"))
+;; Keywords: convenience
+;; Maintainer: marcowahlsoft@gmail.com
+
+;; This file is not part of GNU Emacs.
+
+;; This program is free software: you can redistribute it and/or
+;; modify it under the terms of the GNU General Public License as
+;; published by the Free Software Foundation, either version 3 of the
+;; License, or (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;; General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see
+;; <http://www.gnu.org/licenses/>.
 
 #+end_src
 
@@ -300,11 +323,6 @@ la")
 ;; THIS FILE HAS BEEN GENERATED.
 
 
-;;
-;; Version: <<version>>
-;; Package-Requires: ((emacs "24"))
-;; Keywords: convenience
-
 ;;; Commentary:
 ;;
 ;; This program supports underlining with a certain character.
