@@ -6,7 +6,7 @@
 ;; :END:
 
 
-;; [[file:~/p/elisp/mw/underline-with-char/underline-with-char.org::*Concrete%20tests][Concrete tests:1]]
+;; [[id:17c5897e-3413-4576-aa83-3869e0cb1053][Concrete tests:1]]
 (require 'underline-with-char)
 
 (ert-deftest 00e3c5a96043b3c097e3aed45a7b6025b785cee4 ()
