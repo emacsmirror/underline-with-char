@@ -42,7 +42,13 @@
 ;; When point is in an empty line then fill the line with a character
 ;; making it as long as the line above.
 ;;
-;; This program provides just command =underline-with-char=.
+;; This program provides just command `underline-with-char' and
+;; variable `underline-with-char-fill-char'.
+
+;; You can change the default underline character via
+;;
+;; M-x customize-variable underline-with-char-fill-char
+
 ;;
 
 ;; Examples
