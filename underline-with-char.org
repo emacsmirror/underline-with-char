@@ -169,9 +169,9 @@ The tests are style ert-runner (which needs cask IIUC.)
 
 Run tests e.g. like
 
-[[elisp:(compile%20"CASK_EMACS=/usr/bin/emacs-25.2%20make%20test")][elisp:(compile "CASK_EMACS=/usr/bin/emacs-25.2 make test")]]
+[[elisp:(compile "CASK_EMACS=/usr/bin/emacs-25.2 make test")]]
 
-Hint: Possibly you need to perform [[elisp:(compile%20"CASK_EMACS=/usr/bin/emacs-25.2%20cask%20install")][elisp:(compile
+Hint: Possibly you need to perform [[elisp:(compile
 "CASK_EMACS=/usr/bin/emacs-25.2 cask install")]] as precondition to be
 able to run tests.
 
@@ -190,7 +190,6 @@ CASK_EMACS=/usr/bin/emacs-25.2 cask exec ert-runner help
 
 *** First line
 :PROPERTIES:
-:ID:       c3ab7721-53d9-4abe-a5e6-e031c4a9f5f1
 :END:
 
 #+begin_src emacs-lisp :padline no
@@ -199,7 +198,6 @@ CASK_EMACS=/usr/bin/emacs-25.2 cask exec ert-runner help
 
 *** Concrete tests
 :PROPERTIES:
-:ID:       17c5897e-3413-4576-aa83-3869e0cb1053
 :END:
 
 #+begin_src emacs-lisp :comments both
@@ -256,8 +254,8 @@ la")
 
 *** Last line
 :PROPERTIES:
-:ID:       d37f9d32-541b-4a08-815e-394d858586d6
 :END:
+
 #+begin_src emacs-lisp
 ;;; underline-with-char-test.el ends here
 #+end_src
@@ -284,9 +282,6 @@ la")
 :END:
 
 ** First lines
-:PROPERTIES:
-:ID:       c3ab7721-53d9-4abe-a5e6-e031c4a9f5f1
-:END:
 
 #+begin_src emacs-lisp :padline no :noweb yes
 ;;; underline-with-char.el --- Underline with a char  -*- lexical-binding: t ; eval: (view-mode 1) -*-
@@ -320,7 +315,6 @@ la")
 
 ** Program
 :PROPERTIES:
-:ID:       17c5897e-3413-4576-aa83-3869e0cb1053
 :END:
 
 #+begin_src emacs-lisp :comments both :noweb yes
@@ -485,8 +479,8 @@ get
 
 ** Last line
 :PROPERTIES:
-:ID:       d37f9d32-541b-4a08-815e-394d858586d6
 :END:
+
 #+begin_src emacs-lisp
 
 
