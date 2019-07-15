@@ -290,7 +290,7 @@ la")
 :END:
 
 #+begin_src emacs-lisp :padline no :noweb yes
-;;; underline-with-char.el --- Underline with a char  -*- lexical-binding: t ; eval: (view-mode 1) -*-
+;;; underline-with-char.el --- Underline with a char  -*- lexical-binding: t -*-
 
 ;; THIS FILE HAS BEEN GENERATED.
 
@@ -325,7 +325,7 @@ la")
 :ID:       89f7d45a-819a-4610-8ab3-54db36b6751b
 :END:
 
-#+begin_src emacs-lisp :comments both :noweb yes
+#+begin_src emacs-lisp :noweb yes
 
 ;; THIS FILE HAS BEEN GENERATED.
 

@@ -1,4 +1,4 @@
-;;; underline-with-char.el --- Underline with a char  -*- lexical-binding: t ; eval: (view-mode 1) -*-
+;;; underline-with-char.el --- Underline with a char  -*- lexical-binding: t -*-
 
 ;; THIS FILE HAS BEEN GENERATED.
 
@@ -8,6 +8,7 @@
 ;; Package-Requires: ((emacs "24"))
 ;; Keywords: convenience
 ;; Maintainer: marcowahlsoft@gmail.com
+;; URL: https://gitlab.com/marcowahl/underline-with-char
 
 ;; This file is not part of GNU Emacs.
 
@@ -25,13 +26,6 @@
 ;; along with this program.  If not, see
 ;; <http://www.gnu.org/licenses/>.
 
-;; Program
-;; :PROPERTIES:
-;; :ID:       17c5897e-3413-4576-aa83-3869e0cb1053
-;; :END:
-
-
-;; [[id:17c5897e-3413-4576-aa83-3869e0cb1053][Program:1]]
 ;; THIS FILE HAS BEEN GENERATED.
 
 
@@ -188,7 +182,6 @@ get
 
 
 (provide 'underline-with-char)
-;; Program:1 ends here
 
 
 ;;; underline-with-char.el ends here
