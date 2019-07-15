@@ -282,9 +282,12 @@ la")
 :END:
 
 ** First lines
+:PROPERTIES:
+:ID:       c4a7a234-4f30-40f8-b847-f9b71d02a188
+:END:
 
 #+begin_src emacs-lisp :padline no :noweb yes
-;;; underline-with-char.el --- Underline with a char  -*- lexical-binding: t ; eval: (view-mode 1) -*-
+;;; underline-with-char.el --- Underline with a char  -*- lexical-binding: t -*-
 
 ;; THIS FILE HAS BEEN GENERATED.
 
@@ -294,6 +297,7 @@ la")
 ;; Package-Requires: ((emacs "24"))
 ;; Keywords: convenience
 ;; Maintainer: marcowahlsoft@gmail.com
+;; URL: https://gitlab.com/marcowahl/underline-with-char
 
 ;; This file is not part of GNU Emacs.
 
@@ -315,9 +319,10 @@ la")
 
 ** Program
 :PROPERTIES:
+:ID:       89f7d45a-819a-4610-8ab3-54db36b6751b
 :END:
 
-#+begin_src emacs-lisp :comments both :noweb yes
+#+begin_src emacs-lisp :noweb yes
 
 ;; THIS FILE HAS BEEN GENERATED.
 

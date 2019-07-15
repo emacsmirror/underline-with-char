@@ -1,1 +1,516 @@
-underline-with-char.org
+#+title: Underline with a char
+
+* License
+
+Copyright (c) Marco Wahl 2017
+
+GPL 3
+
+* About
+:PROPERTIES:
+:ID:       d1310a31-62ff-452f-b07b-312a17bf85b0
+:END:
+
+[[https://travis-ci.org/marcowahl/underline-with-char.svg?branch=master]]
+
+This program supports underlining with a certain character.
+
+When point is in an empty line then fill the line with a character
+making it as long as the line above.
+
+This program provides just command =underline-with-char= and variable
+=underline-with-char-fill-char=.
+
+You can change the default underline character via
+
+M-x customize-variable underline-with-char-fill-char
+
+** Examples
+
+Notation:
+- | means the cursor.
+- RET means the return key.
+
+*** Full underlining
+
+**** Input
+
+#+begin_src text
+lala
+|
+#+end_src
+
+**** Action
+
+M-x underline-with-char RET
+
+**** Output
+
+#+begin_src text
+lala
+----|
+#+end_src
+
+*** Partial underlining
+
+**** Input
+
+#+begin_src text
+lolololo
+//|
+#+end_src
+
+**** Action
+
+M-x underline-with-char RET
+
+**** Output
+
+#+begin_src text
+lolololo
+//------|
+#+end_src
+
+*** Use a certain char for current and subsequent underlinings (1)
+
+**** Input
+
+#+begin_src text
+lala
+|
+#+end_src
+
+**** Action
+
+C-u M-x underline-with-char X RET
+
+**** Output
+
+#+begin_src text
+lala
+XXXX|
+#+end_src
+
+*** Use a certain char for current and subsequent underlinings (2)
+
+**** Input
+
+#+begin_src text
+lala
+|
+#+end_src
+
+**** Action
+
+C-u M-x underline-with-char X RET RET M-x underline-with-char RET
+
+**** Output
+
+#+begin_src text
+lala
+XXXX
+XXXX|
+#+end_src
+
+** Version
+
+#+name: version
+#+begin_src txt
+3.0.1
+#+end_src
+
+** Links
+
+| https://www.emacswiki.org/emacs/UnderlineWith | slightly different |
+
+* Install
+
+There are options.
+
+** Install the package
+
+E.g. from [[https://melpa.org/#/underline-with-char][file:https://melpa.org/packages/underline-with-char-badge.svg]].
+
+** Load the elisp file
+
+=M-x load <path to underline-with-char.el>=
+
+* Build
+
+This is a literate program.  Generating the pure program is called
+tangling.  Concretely tangle with C-cvt in Emacs Orgmode.
+
+** Build with cask
+
+With support of cask the build can be done in seperate environment.
+
+*** For the very first stages
+
+You might need to perform
+
+#+begin_src shell
+export CASK_EMACS=/usr/bin/emacs-25.2
+cask init
+cask install
+cask exec ert-runner init
+#+end_src
+
+- [2017-06-21 Wed 12:14] tip version of Emacs did not work with cask install.
+
+* Testing
+
+** Unit tests
+:PROPERTIES:
+:ID:       c960a64f-5dc8-463d-b7b5-48f3c1ff2a3d
+:header-args:emacs-lisp: :tangle test/underline-with-char-test.el
+:END:
+
+The tests are style ert-runner (which needs cask IIUC.)
+
+Run tests e.g. like
+
+[[elisp:(compile "CASK_EMACS=/usr/bin/emacs-25.2 make test")]]
+
+Hint: Possibly you need to perform [[elisp:(compile
+"CASK_EMACS=/usr/bin/emacs-25.2 cask install")]] as precondition to be
+able to run tests.
+
+Recall cask does not work well with current Emacs tip version I use
+normally.  This is the rationale for the setting CASK_EMACS to a
+suitable version.
+
+Get help about the test-runner with
+
+#+begin_src shell
+CASK_EMACS=/usr/bin/emacs-25.2 cask exec ert-runner help
+#+end_src
+
+- Note :: I think that the test file must end with "-test" with
+          ert-runner default settings.
+
+*** First line
+:PROPERTIES:
+:ID:       bf1c83f1-c312-4cff-a4bc-c55622cdaed2
+:END:
+
+#+begin_src emacs-lisp :padline no
+;;; underline-with-char-test.el --- tests for underline-with-char.el  -*- lexical-binding: t ; eval: (view-mode 1) -*-
+#+end_src
+
+*** Concrete tests
+:PROPERTIES:
+:ID:       77b1e4f7-2257-4e5a-80b2-b698ba75f0ed
+:END:
+
+#+begin_src emacs-lisp :comments both
+(require 'underline-with-char)
+
+(ert-deftest 00e3c5a96043b3c097e3aed45a7b6025b785cee4 ()
+  "Underlining."
+  (should
+   (equal
+    "lala
+----"
+    (with-temp-buffer
+      (let ((underline-with-char-fill-char ?-))
+        (insert "lala
+")
+        (call-interactively #'underline-with-char)
+        (buffer-substring (point-min) (point-max)))))))
+
+(ert-deftest e4ae03c8136e975f0aa150114691df12e3102443 ()
+  "Point position after underlining."
+  (should
+   (= 10
+    (with-temp-buffer
+      (let ((underline-with-char-fill-char ?-))
+       (insert "lala
+")
+       (call-interactively #'underline-with-char)
+       (point))))))
+
+(ert-deftest 234becd70fa5970239b1579660d2b2055ae2b68e ()
+  "Partial underlining."
+  (should
+   (equal
+    "lala
+la--"
+    (with-temp-buffer
+      (let ((underline-with-char-fill-char ?-))
+        (insert "lala
+la")
+        (call-interactively #'underline-with-char)
+        (buffer-substring (point-min) (point-max)))))))
+
+(ert-deftest 19d8326c90bd01b85f54171e4a84798924052aaa ()
+  "Point position after underlining."
+  (should
+   (= 10
+      (with-temp-buffer
+        (let ((underline-with-char-fill-char ?-))
+          (insert "lala
+la")
+          (call-interactively #'underline-with-char)
+          (point))))))
+#+end_src
+
+*** Last line
+:PROPERTIES:
+:ID:       ec0407f7-e7c1-4323-a439-28464be86b4c
+:END:
+
+#+begin_src emacs-lisp
+;;; underline-with-char-test.el ends here
+#+end_src
+
+** Manual tests
+
+*** Change the underline character
+
+- In a new buffer do (insert "lala\n").
+- Point shall be in the line below the text.
+- Do M-x underline-with-char
+- Expectation :: the line has been underlined with some character.
+- Create a fresh line.
+- Do C-u M-x underline-with-char
+- Press X.
+- Expectation :: the line has been underlined with character X.
+- Create a fresh line.
+- Do M-x underline-with-char
+- Expectation :: the line has been underlined with character X.
+
+* Code
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle underline-with-char.el
+:END:
+
+** First lines
+:PROPERTIES:
+:ID:       c4a7a234-4f30-40f8-b847-f9b71d02a188
+:END:
+
+#+begin_src emacs-lisp :padline no :noweb yes
+;;; underline-with-char.el --- Underline with a char  -*- lexical-binding: t ; eval: (view-mode 1) -*-
+
+;; THIS FILE HAS BEEN GENERATED.
+
+;; Copyright (C) 2017 Marco Wahl
+;;
+;; Version: <<version>>
+;; Package-Requires: ((emacs "24"))
+;; Keywords: convenience
+;; Maintainer: marcowahlsoft@gmail.com
+;; URL: https://gitlab.com/marcowahl/underline-with-char
+
+;; This file is not part of GNU Emacs.
+
+;; This program is free software: you can redistribute it and/or
+;; modify it under the terms of the GNU General Public License as
+;; published by the Free Software Foundation, either version 3 of the
+;; License, or (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful, but
+;; WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+;; General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see
+;; <http://www.gnu.org/licenses/>.
+
+#+end_src
+
+** Program
+:PROPERTIES:
+:ID:       89f7d45a-819a-4610-8ab3-54db36b6751b
+:END:
+
+#+begin_src emacs-lisp :comments both :noweb yes
+
+;; THIS FILE HAS BEEN GENERATED.
+
+
+;;; Commentary:
+;;
+;; This program supports underlining with a certain character.
+;;
+;; When point is in an empty line then fill the line with a character
+;; making it as long as the line above.
+;;
+;; This program provides just command `underline-with-char' and
+;; variable `underline-with-char-fill-char'.
+
+;; You can change the default underline character via
+;;
+;; M-x customize-variable underline-with-char-fill-char
+
+;;
+
+;; Examples
+;; ========
+;;
+;; Notation:
+;; - | means the cursor.
+;; - RET means the return key.
+;;
+
+;; Full underlining
+;; ................
+;;
+;; Input
+;; _____
+;;
+;; lala
+;; |
+;;
+;; Action
+;; ______
+;;
+;; M-x underline-with-char RET
+;;
+;; Output
+;; ______
+;;
+;; lala
+;; ----|
+;;
+
+;; Partial underlining
+;; ...................
+;;
+;; Input
+;; _____
+;;
+;; lolololo
+;; //|
+;;
+;; Action
+;; ______
+;;
+;; M-x underline-with-char RET
+;;
+;; Output
+;; ______
+;;
+;; lolololo
+;; //------|
+;;
+
+;; Use a certain char for current and subsequent underlinings (1)
+;; ..............................................................
+;;
+;; Input
+;; _____
+;;
+;; lala
+;; |
+;;
+;; Action
+;; ______
+;;
+;; C-u M-x underline-with-char X RET
+;;
+;; Output
+;; ______
+;;
+;; lala
+;; XXXX|
+;;
+
+;; Use a certain char for current and subsequent underlinings (2)
+;; ..............................................................
+;;
+;; Input
+;; _____
+;;
+;; lala
+;; |
+;;
+;; Action
+;; ______
+;;
+;; C-u M-x underline-with-char X RET RET M-x underline-with-char RET
+;;
+;; Output
+;; ______
+;;
+;; lala
+;; XXXX
+;; XXXX|
+
+
+;;; Code:
+
+
+(defcustom underline-with-char-fill-char ?-
+  "The character for the underline."
+  :group 'underline-with-char
+  :type 'character)
+
+
+;;;###autoload
+(defun underline-with-char (arg)
+  "Underline the line above with a certain character.
+
+Fill what's remaining if not at the first position.
+
+The default character is `underline-with-char-fill-char'.
+
+With prefix ARG use the next entered character for this and
+subsequent underlining.
+
+Example with `underline-with-char-fill-char' set to '-' and point
+symbolized as | and starting with
+
+;; Commentary:
+;; |
+
+get
+
+;; Commentary:
+;; -----------|"
+  (interactive "P")
+  (when (equal '(4) arg)
+    (setq underline-with-char-fill-char (read-char "char: ")))
+  (insert
+   (make-string
+    (save-excursion
+      (let ((col (current-column)))
+        (forward-line -1)
+        (end-of-line)
+        (max 0 (- (current-column) col))))
+    underline-with-char-fill-char)))
+
+
+(provide 'underline-with-char)
+#+end_src
+
+** Last line
+:PROPERTIES:
+:ID:       12ccbd6a-0a18-49e0-aaca-4b36827f6b9d
+:END:
+
+#+begin_src emacs-lisp
+
+
+;;; underline-with-char.el ends here
+#+end_src
+
+* Tasks
+
+** TODO Automate the manual tests
+
+** TODO Generate the Commentary from the about section
+
+*** input
+
+the about section.  (maybe some additional information about
+what shall go into the documentation.  idea: use tags somehow.)
+
+*** action
+
+process the data.
+
+*** output
+
+Fresh Commentary-section in the Org-file to be tangled.  Or similar.
