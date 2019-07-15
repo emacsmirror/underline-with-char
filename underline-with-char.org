@@ -2,7 +2,7 @@
 
 * License
 
-Copyright (c) Marco Wahl 2017
+Copyright (c) Marco Wahl 2017, 2019
 
 GPL 3
 
@@ -294,7 +294,7 @@ la")
 
 ;; THIS FILE HAS BEEN GENERATED.
 
-;; Copyright (C) 2017 Marco Wahl
+;; Copyright (C) 2017, 2019 Marco Wahl
 ;;
 ;; Version: <<version>>
 ;; Package-Requires: ((emacs "24"))
@@ -316,7 +316,7 @@ la")
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see
-;; <http://www.gnu.org/licenses/>.
+;; <https://www.gnu.org/licenses/>.
 
 #+end_src
 
