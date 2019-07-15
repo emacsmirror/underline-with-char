@@ -11,8 +11,6 @@ GPL 3
 :ID:       d1310a31-62ff-452f-b07b-312a17bf85b0
 :END:
 
-[[https://travis-ci.org/marcowahl/underline-with-char.svg?branch=master]]
-
 This program supports underlining with a certain character.
 
 When point is in an empty line then fill the line with a character
