@@ -190,6 +190,7 @@ CASK_EMACS=/usr/bin/emacs-25.2 cask exec ert-runner help
 
 *** First line
 :PROPERTIES:
+:ID:       bf1c83f1-c312-4cff-a4bc-c55622cdaed2
 :END:
 
 #+begin_src emacs-lisp :padline no
@@ -198,6 +199,7 @@ CASK_EMACS=/usr/bin/emacs-25.2 cask exec ert-runner help
 
 *** Concrete tests
 :PROPERTIES:
+:ID:       77b1e4f7-2257-4e5a-80b2-b698ba75f0ed
 :END:
 
 #+begin_src emacs-lisp :comments both
@@ -254,6 +256,7 @@ la")
 
 *** Last line
 :PROPERTIES:
+:ID:       ec0407f7-e7c1-4323-a439-28464be86b4c
 :END:
 
 #+begin_src emacs-lisp
@@ -484,6 +487,7 @@ get
 
 ** Last line
 :PROPERTIES:
+:ID:       12ccbd6a-0a18-49e0-aaca-4b36827f6b9d
 :END:
 
 #+begin_src emacs-lisp
