@@ -2,7 +2,7 @@
 
 ;; THIS FILE HAS BEEN GENERATED.
 
-;; Copyright (C) 2017 Marco Wahl
+;; Copyright (C) 2017, 2019 Marco Wahl
 ;;
 ;; Version: 3.0.1
 ;; Package-Requires: ((emacs "24"))
@@ -24,7 +24,7 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see
-;; <http://www.gnu.org/licenses/>.
+;; <https://www.gnu.org/licenses/>.
 
 ;; THIS FILE HAS BEEN GENERATED.
 
@@ -159,12 +159,14 @@ With prefix ARG use the next entered character for this and
 subsequent underlining.
 
 Example with `underline-with-char-fill-char' set to '-' and point
-symbolized as | and starting with
+symbolized as |.
 
 ;; Commentary:
 ;; |
 
-get
+    M-x underline-with-char RET
+
+yields
 
 ;; Commentary:
 ;; -----------|"

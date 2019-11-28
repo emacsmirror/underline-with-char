@@ -458,12 +458,14 @@ With prefix ARG use the next entered character for this and
 subsequent underlining.
 
 Example with `underline-with-char-fill-char' set to '-' and point
-symbolized as | and starting with
+symbolized as |.
 
 ;; Commentary:
 ;; |
 
-get
+    M-x underline-with-char RET
+
+yields
 
 ;; Commentary:
 ;; -----------|"
